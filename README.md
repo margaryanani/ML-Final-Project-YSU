@@ -82,7 +82,7 @@ The dataset is imbalanced.
 - There’s not much of difference in default rate between genders.
 
 ## Data Preprocessing
-First I converted ecategorical variables in a DataFrame into a format suitable for machine learning models by transforming them into one-hot encoded columns. It replaces the original categorical columns with multiple binary columns that indicate the presence of each category. Then i removed unnecessary variables like `ID`, splitted the data into features (X) and target (y) and Scaled the features using StandardScaler.
+First I converted categorical variables in a DataFrame into a format suitable for machine learning models by transforming them into one-hot encoded columns. It replaces the original categorical columns with multiple binary columns that indicate the presence of each category. Then i removed unnecessary variables like `ID`, splitted the data into features (X) and target (y) and Scaled the features using StandardScaler.
 
 ## Modeling
 
@@ -101,7 +101,13 @@ After training I tested the models and calculated evaluation metrics: `accuracy_
 | F1 Score       | 0.463               | 0.486                | 0.526                   | 0.389          | 0.363        | 0.491                    |
 | ROC-AUC        | 0.717               | 0.736                | 0.752                   | 0.611          | 0.729        | 0.746                    |
 
-The best-performing model was Bagging, with a test accuracy of 0.806 and a ROC-AUC score of 0.746. IT reduces overfitting by averaging predictions over multiple diverse trees, improving generalization. SVM and K-Nearest Neighbors also worked well.
+The best accuracy got Bagging, SVM and K-Nearest.
 
-Naive Bayes has Very high Recall score of 0.978, but extremely low Precision (0.223) and Accuracy (0.262). Predicts nearly all defaults, leading to many false positives. Decision Tree has very high CV Accuracy (0.877) but lower Test Accuracy (0.734),which indicates overfitting.
+Best at Finding Defaults (Recall) Naive Bayes was by far the best at catching actual defaults (93% recall), Logistic Regression caught 66% of defaults.Other models struggled to find defaults.
+
+when it came to Precise Predictions Bagging was most accurate (59% precision),SVM and K-NN had around 50% precision, Naive Bayes had very poor precision at only 25%.
+
+Decision Tree showed a huge drop from 87.3% cross-validation accuracy to 73.5% test accuracy, which indicates overfitting. Naive Bayes assumes that all features are independent, which probably isn't true for credit card data. For example, a person's income and spending patterns are likely related, but Naive Bayes treats them as completely separate, thats why its precision is 25%.
+
+Based on the results, I would choose Support Vector Machine (SVM) as the overall best model for this credit card default prediction problem, because it gave the most balanced performance, is consistent and reliable. 
 
