@@ -1,8 +1,8 @@
 # Credit Default Analysis
 For this project I used a dataset that contains information on default payments, demographic factors, credit data, history of payment, and bill statements of credit card clients in Taiwan from April 2005 to September 2005. This is a classification problem where we predict if a client will default on their credit card payment.
 
-You can find the code in the "Code" file: ''
-## Dataset
+You can find the code in the "Code" file: 'credit_default_analysis.ipynb'
+## Dataset Overview
 Rows: 30,000, Columns: 25
 - **ID**: ID of each client
 - **LIMIT_BAL**: Amount of given credit in NT dollars (includes individual and family/supplementary credit
@@ -29,4 +29,25 @@ Rows: 30,000, Columns: 25
 - **PAY_AMT5**: Amount of previous payment in May, 2005 (NT dollar)
 - **PAY_AMT6**: Amount of previous payment in April, 2005 (NT dollar)
 - **default.payment.next.month**: Default payment (1=yes, 0=no)
+
+The dataset has no missing values, 13 float and 12 integer features.
+
+### Class distribution 
+
+No Default: 23,364 (≈ 77.88%)
+
+Default: 6,636 (≈ 22.12%)
+
+The dataset is imbalanced.
+
+### Features
+- Credit limit (LIMIT_BAL) ranges from 10,000 to 1,000,000.
+- Age ranges from 21 to 79 years.
+- Payment history variables (PAY_0 to PAY_6) range from -2 to 8.
+- PAY_0 to PAY_6 are strongly correlated with each other.
+- The target variable has the strongest correlation with PAY_0(0.32),PAY_2(0.26),PAY_3(0.24), PAY_4(0.24).
+- Clients who defaulted had slightly lower credit limits on average. There are significant outliers in both groups.
+- Default rates are more common in the younger age groups. As age increases, the default rate drops.
+- There’s not much of difference in default rate between genders.
+
 
