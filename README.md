@@ -1,7 +1,38 @@
 # Credit Default Analysis
 For this project I used a dataset that contains information on default payments, demographic factors, credit data, history of payment, and bill statements of credit card clients in Taiwan from April 2005 to September 2005. This is a classification problem where we predict if a client will default on their credit card payment.
 
-You can find the code in the "Code" file: 'credit_default_analysis.ipynb'
+You can find the code in the "Code" folder: 'credit_default_analysis.ipynb'
+## Libraries
+`import pandas as pd`
+
+`import numpy as np`
+
+`import matplotlib.pyplot as plt`
+
+`import seaborn as sns`
+
+`from sklearn.model_selection import train_test_split, cross_val_score`
+
+`from sklearn.preprocessing import StandardScaler`
+
+`from sklearn.linear_model import LogisticRegression`
+
+`from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, precision_score, recall_score, f1_score`
+
+`from sklearn.svm import SVC`
+
+`from sklearn.neighbors import KNeighborsClassifier`
+
+`from sklearn.tree import DecisionTreeClassifier`
+
+`from sklearn.naive_bayes import GaussianNB`
+
+`from sklearn.metrics import roc_curve, roc_auc_score`
+
+`from imblearn.over_sampling import RandomOverSampler`
+
+`from sklearn.ensemble import BaggingClassifier`
+
 ## Dataset Overview
 Rows: 30,000, Columns: 25
 - **ID**: ID of each client
@@ -50,4 +81,27 @@ The dataset is imbalanced.
 - Default rates are more common in the younger age groups. As age increases, the default rate drops.
 - There’s not much of difference in default rate between genders.
 
+## Data Preprocessing
+First I converted ecategorical variables in a DataFrame into a format suitable for machine learning models by transforming them into one-hot encoded columns. It replaces the original categorical columns with multiple binary columns that indicate the presence of each category. Then i removed unnecessary variables like `ID`, splitted the data into features (X) and target (y) and Scaled the features using StandardScaler.
+
+## Modeling
+
+For modeling I Train-Test Splited the data and since the dataset was imbalanced I used `RandomOverSampler` to balance the class distribution.
+
+Then i trained 6 models: Logistic Regression, K-Nearest Neighbors, Support Vector Machine, Decision Tree, Naive Bayes, Bagging (Decision Tree).
+
+After training I tested the models and calculated evaluation metrics: `accuracy_score`, `precision_score`, `recall_score`, `f1_score`, `roc_auc_score`.
+
+| Metric         | Logistic Regression | K-Nearest Neighbors | Support Vector Machine | Decision Tree | Naive Bayes | Bagging (Decision Tree) |
+|----------------|---------------------|----------------------|-------------------------|----------------|--------------|--------------------------|
+| CV Accuracy    | 0.674               | 0.684                | 0.722                   | 0.877          | 0.524        | 0.929                    |
+| Test Accuracy  | 0.681               | 0.776                | 0.778                   | 0.734          | 0.262        | 0.806                    |
+| Precision      | 0.363               | 0.481                | 0.485                   | 0.385          | 0.223        | 0.565                    |
+| Recall         | 0.639               | 0.491                | 0.573                   | 0.394          | 0.978        | 0.434                    |
+| F1 Score       | 0.463               | 0.486                | 0.526                   | 0.389          | 0.363        | 0.491                    |
+| ROC-AUC        | 0.717               | 0.736                | 0.752                   | 0.611          | 0.729        | 0.746                    |
+
+The best-performing model was Bagging, with a test accuracy of 0.806 and a ROC-AUC score of 0.746. IT reduces overfitting by averaging predictions over multiple diverse trees, improving generalization. SVM and K-Nearest Neighbors also worked well.
+
+Naive Bayes has Very high Recall score of 0.978, but extremely low Precision (0.223) and Accuracy (0.262). Predicts nearly all defaults, leading to many false positives. Decision Tree has very high CV Accuracy (0.877) but lower Test Accuracy (0.734),which indicates overfitting.
 
