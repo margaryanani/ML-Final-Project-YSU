@@ -109,5 +109,5 @@ when it came to Precise Predictions Bagging was most accurate (59% precision),SV
 
 Decision Tree showed a huge drop from 87.3% cross-validation accuracy to 73.5% test accuracy, which indicates overfitting. Naive Bayes assumes that all features are independent, which probably isn't true for credit card data. For example, a person's income and spending patterns are likely related, but Naive Bayes treats them as completely separate, thats why its precision is 25%.
 
-Based on the results, I would choose Support Vector Machine (SVM) as the overall best model for this credit card default prediction problem, because it gave the most balanced performance, is consistent and reliable. 
+Based on the results, there is no model that perfomes well in every aspect,but if I had to choose one it will be Support Vector Machine (SVM) as the overall best model for this credit card default prediction problem, because it gave the most balanced performance, is consistent and reliable compare to others. 
 
