@@ -75,7 +75,7 @@ The dataset is imbalanced.
 - Credit limit (LIMIT_BAL) ranges from 10,000 to 1,000,000.
 - Age ranges from 21 to 79 years.
 - Payment history variables (PAY_0 to PAY_6) range from -2 to 8.
-- PAY_0 to PAY_6 are strongly correlated with each other.
+- PAY_0 to PAY_6 are strongly correlated with each other and BILL_AMT1 to BILL_AMT6 as well.
 - The target variable has the strongest correlation with PAY_0(0.32),PAY_2(0.26),PAY_3(0.24), PAY_4(0.24).
 - Clients who defaulted had slightly lower credit limits on average. There are significant outliers in both groups.
 - Default rates are more common in the younger age groups. As age increases, the default rate drops.
